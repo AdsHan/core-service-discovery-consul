@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+
+    consul:
+        image: consul
+        container_name: consul        
+        ports:
+            - 8500:8500
+        networks:
+            - discovery-network
+
+    #consul:
+    #    image: gliderlabs/consul-server:latest
+    #    container_name: consul
+    #    ports:
+    #      - 8500:8500
+    #    command:
+    #      - -bootstrap
+    #    networks:
+    #      - discovery-network
+
+    #consul-service-registry:
+    #    image: gliderlabs/registrator:latest
+    #    container_name: consul-service-registry
+    #    volumes:
+    #        - /var/run/docker.sock:/tmp/docker.sock
+    #    depends_on:
+    #        - consul
+    #    command:
+    #        - consul://consul:8500
+    #    networks:
+    #        - discovery-network
+
+networks:
+    discovery-network:
+        driver: bridge
